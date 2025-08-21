@@ -1,0 +1,35 @@
+# action.yml
+name: "Publish Markdown blogs to Dev.to"
+description: "Publish markdown articles to Dev.to with frontmatter support"
+author: "kodelint"
+
+branding:
+  icon: "edit-3"
+  color: "blue"
+
+inputs:
+  api-key:
+    description: "Dev.to API key"
+    required: true
+  posts-directory:
+    description: "Directory containing markdown files to publish"
+    required: false
+    default: "posts"
+  published:
+    description: "Set to true to publish articles immediately, false for drafts"
+    required: false
+    default: "false"
+  dry-run:
+    description: "Run without actually publishing (useful for testing)"
+    required: false
+    default: "false"
+
+outputs:
+  published-count:
+    description: "Number of articles published"
+  articles:
+    description: "JSON array of published article URLs"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"

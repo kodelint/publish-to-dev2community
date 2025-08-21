@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build action
+        run: npm run build
+
+      - name: Commit built files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add dist/
+          git diff --staged --quiet || git commit -m "Update built files for release ${{ github.event.release.tag_name }}"
+          git push
+
+      - name: Update major version tag
+        run: |
+          # Extract major version from tag (v1.2.3 -> v1)
+          TAG=${{ github.event.release.tag_name }}
+          MAJOR_VERSION=$(echo $TAG | sed -E 's/v?([0-9]+)\..*/v\1/')
+
+          # Force update the major version tag
+          git tag -fa $MAJOR_VERSION -m "Update $MAJOR_VERSION to $TAG"
+          git push -f origin $MAJOR_VERSION
+
+      - name: Create or update latest tag
+        run: |
+          git tag -fa latest -m "Latest release: ${{ github.event.release.tag_name }}"
+          git push -f origin latest

@@ -1,0 +1,94 @@
+name: CI Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18, 20]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build action
+        run: npm run build
+
+      - name: Check build artifacts
+        run: |
+          if [ ! -f "dist/index.js" ]; then
+            echo "Build failed - dist/index.js not found"
+            exit 1
+          fi
+          echo "Build successful"
+
+  integration-test:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create test posts
+        run: |
+          mkdir -p test-posts
+          cat > test-posts/test-article.md << 'EOF'
+          ---
+          title: "Test Article from CI"
+          published: false
+          description: "This is a test article created during CI"
+          tags: ["test", "github-actions"]
+          ---
+
+          # Test Article
+
+          This is a test article to verify the action works correctly.
+
+          ## Features
+
+          - Markdown support
+          - Frontmatter parsing
+          - API integration
+          EOF
+
+      - name: Test action (dry run)
+        uses: ./
+        with:
+          api-key: "test-key"
+          posts-directory: "test-posts"
+          dry-run: "true"
+        id: test-action
+
+      - name: Verify outputs
+        run: |
+          echo "Published count: ${{ steps.test-action.outputs.published-count }}"
+          echo "Articles: ${{ steps.test-action.outputs.articles }}"
+
+          # Check that dry run found our test file
+          if [ "${{ steps.test-action.outputs.published-count }}" != "1" ]; then
+            echo "Expected 1 article to be processed, got ${{ steps.test-action.outputs.published-count }}"
+            exit 1
+          fi
