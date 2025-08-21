@@ -1,11 +1,11 @@
-# Dev.to Publisher Action
+# Publisher for Dev Community
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/kodelint/devto-publisher-actionpublish-to-dev2community?style=flat-square)](https://github.com/kodelint/publish-to-dev2community/releases)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/kodelint/publish-to-dev2community?style=flat-square)](https://github.com/kodelint/publish-to-dev2community/releases)
 [![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Dev.to%20Publisher-blue.svg?colorA=24292e&colorB=0366d6&style=flat-square&longCache=true&logo=github)](https://github.com/marketplace/actions/devto-publisher-action)
 [![CI Tests](https://img.shields.io/github/actions/workflow/status/kodelint/publish-to-dev2community/test.yml?branch=main&label=tests&style=flat-square)](https://github.com/kodelint/publish-to-dev2community/actions)
-[![codecov](https://img.shields.io/codecov/c/github/kodelint/publish-to-dev2community?style=flat-square)](https://codecov.io/gh/kodelint/publish-to-dev2community)
+[![Last commit](https://img.shields.io/github/last-commit/kodelint/publish-to-dev2community.svg)](https://github.com/kodelint/publish-to-dev2community/commits/main)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen?style=flat-square&logo=node.js)](https://nodejs.org)
-[![Dev.to API](https://img.shields.io/badge/Dev.to-API%20v1-black?style=flat-square&logo=dev.to)](https://developers.forem.com/api)
+[![Dev Cummunity API](https://img.shields.io/badge/Dev.to-API?logo=dev.to)](https://developers.forem.com/api)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![GitHub issues](https://img.shields.io/github/issues/kodelint/publish-to-dev2community?style=flat-square)](https://github.com/kodelint/publish-to-dev2community/issues)
 [![GitHub stars](https://img.shields.io/github/stars/kodelint/publish-to-dev2community?style=flat-square)](https://github.com/kodelint/publish-to-dev2community/stargazers)
