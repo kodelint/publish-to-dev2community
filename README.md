@@ -1,5 +1,15 @@
 # Dev.to Publisher Action
 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/kodelint/devto-publisher-actionpublish-to-dev2community?style=flat-square)](https://github.com/kodelint/publish-to-dev2community/releases)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Dev.to%20Publisher-blue.svg?colorA=24292e&colorB=0366d6&style=flat-square&longCache=true&logo=github)](https://github.com/marketplace/actions/devto-publisher-action)
+[![CI Tests](https://img.shields.io/github/actions/workflow/status/kodelint/publish-to-dev2community/test.yml?branch=main&label=tests&style=flat-square)](https://github.com/kodelint/publish-to-dev2community/actions)
+[![codecov](https://img.shields.io/codecov/c/github/kodelint/publish-to-dev2community?style=flat-square)](https://codecov.io/gh/kodelint/publish-to-dev2community)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen?style=flat-square&logo=node.js)](https://nodejs.org)
+[![Dev.to API](https://img.shields.io/badge/Dev.to-API%20v1-black?style=flat-square&logo=dev.to)](https://developers.forem.com/api)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![GitHub issues](https://img.shields.io/github/issues/kodelint/publish-to-dev2community?style=flat-square)](https://github.com/kodelint/publish-to-dev2community/issues)
+[![GitHub stars](https://img.shields.io/github/stars/kodelint/publish-to-dev2community?style=flat-square)](https://github.com/kodelint/publish-to-dev2community/stargazers)
+
 A GitHub Action that automatically publishes your markdown articles to Dev.to with full frontmatter support.
 
 ## Features
@@ -29,7 +39,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Publish to Dev.to
-        uses: kodelint/devto-publisher-action@v1
+        uses: kodelint/publish-to-dev2community@v1
         with:
           api-key: ${{ secrets.DEVTO_API_KEY }}
           posts-directory: "posts"
@@ -39,7 +49,7 @@ jobs:
 
 ```yaml
 - name: Publish to Dev.to
-  uses: kodelint/devto-publisher-action@v1
+  uses: kodelint/publish-to-dev2community@v1
   with:
     api-key: ${{ secrets.DEVTO_API_KEY }}
     posts-directory: "articles"

@@ -7,12 +7,19 @@ on:
 jobs:
   build-and-update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout a new branch for the release
+        run: |
+          git fetch origin
+          git checkout main || git checkout master || git checkout -b release-temp-${{ github.event.release.tag_name }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
